@@ -6,7 +6,7 @@
 * JAVA_VERSION: 1.8
 * Mysql: 5.7 及以上
 * Redis: 5.0.14
-
+* IDE: IDEA
 
 ## 项目运行步骤
 
