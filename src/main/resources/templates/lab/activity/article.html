@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>日志</title>
+    <link rel="stylesheet" th:href="@{../../css/examples/style.css}" />
+    <link rel="stylesheet" th:href="@{../../css/editormd.css}" />
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.min.css}"/>
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <style >
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Colab</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}"> 首页 </a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template">
+        <header>
+            <h2 th:text="${labActivityBlog.title}"></h2>
+            <a th:href="@{'/lab-activity-blog/toEdit?id='+${labActivityBlog.id}}">编辑日志</a>
+        </header>
+        <div id="test-editormd">
+            <textarea style="display:none;" th:text="${labActivityBlog.content}"></textarea>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{../../js/examples/jquery.min.js}"></script>
+<script th:src="@{../../lib/marked.min.js}"></script>
+<script th:src="@{../../lib/prettify.min.js}"></script>
+<script th:src="@{../../lib/raphael.min.js}"></script>
+<script th:src="@{../../lib/underscore.min.js}"></script>
+<script th:src="@{../../lib/sequence-diagram.min.js}"></script>
+<script th:src="@{../../lib/flowchart.min.js}"></script>
+<script th:src="@{../../lib/jquery.flowchart.min.js}"></script>
+<script th:src="@{../../js/editormd.min.js}"></script>
+<script type="text/javascript">
+
+    var testEditor;
+
+    $(function () {
+        console.log("hello");
+        testEditor = editormd.markdownToHTML("test-editormd", {
+            width: "90%",
+            height: 700,
+            path: "../../lib/",
+            preview: true,
+            watch: true,
+            editor: false,
+        })
+    })
+
+</script>
+</body>
+</html>

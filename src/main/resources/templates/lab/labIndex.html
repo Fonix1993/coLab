@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../css/bootstrap.min.css}"/>
+    <style >
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Colab</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}"> 首页 </a></li>
+
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template">
+        <div class="col-md-6 col-lg-4 col-md-offset-4 col-lg-offset-4col-xl-offset-1">
+            <p>欢迎来到实验室</p>
+            <li><a th:href="@{'/lab-fortune/toLabFortune?labId='+${labId}}">实验室财产</a></li>
+            <li><a th:href="@{'/lab-activity/toActivity?labId='+${labId}+'&userName='+${userName}}">实验室活动</a></li>
+            <li><a th:href="@{'/lab-achievement/toLabAchievement?labId='+${labId}}">实验室成果</a></li>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

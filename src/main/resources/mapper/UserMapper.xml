@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fonix.colab.mapper.UserMapper">
+
+
+    <select id="queryUserByName" parameterType="String" resultType="User">
+        select *
+        from colab.user
+        where username = #{name}
+    </select>
+
+
+    <select id="getById" parameterType="long" resultType="User">
+        select *
+        from colab.user
+        where id = #{userId}
+    </select>
+    <insert id="create" parameterType="User">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user(
+            id,
+            username,
+            password,
+            phone,
+            email,
+            sex,
+            age,
+            address
+        )VALUES(
+            #{id},
+            #{username},
+            #{password},
+            #{phone},
+            #{email},
+            #{sex},
+            #{age},
+            #{address}
+        )
+    </insert>
+</mapper>

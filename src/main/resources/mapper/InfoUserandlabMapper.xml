@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fonix.colab.mapper.InfoUserandlabMapper">
+    <resultMap type="InfoUserandlab" id="infoUserandlabMap">
+        <result property="id" column="id" />
+        <result property="labId" column="labId" />
+        <result property="userName" column="userName" />
+        <result property="permission" column="permission"/>
+    </resultMap>
+    <select id="selectLabsByUserName" parameterType="String" resultMap="infoUserandlabMap">
+        select * from info_userandlab where userName = #{userName}
+    </select>
+
+    <insert id="create" parameterType="InfoUserandlab">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO info_userandlab(
+                             labId,
+                             labName,
+                             userName,
+                             permission
+        )VALUES(
+           #{labId},
+           #{labName},
+           #{userName},
+           #{permission}
+        )
+
+    </insert>
+</mapper>

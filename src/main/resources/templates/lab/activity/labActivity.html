@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.min.css}"/>
+    <style >
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+        table{
+            border: deepskyblue;
+            min-width: 100%;
+            table-layout: fixed;
+        }
+
+        #table-head{
+            overflow:auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Colab</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}"> 首页 </a></li>
+
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template">
+        <div>
+            <p>欢迎查看实验室活动</p>
+            <a th:href="@{'/lab-activity/toCreate?labId=' + ${labId}+'&userName='+${userName}}">新增活动</a>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th >主题</th>
+                    <th >举办时间</th>
+                    <th >地点</th>
+                    <th >参与人</th>
+                    <th >费用</th>
+                    <th >举办方</th>
+                    <th >状态</th>
+                    <th >操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 遍历集合，如果被遍历的变量 activityList 为 null 或者不存在，则不会进行遍历，也不报错-->
+                <tr th:each="activity : ${activityList}">
+
+                    <td>
+                        <a th:text="${activity.topic}" th:href="@{'/lab-activity-blog/get?activityId='+${activity.id}+'&userName='+ ${userName}}"></a>
+                    </td>
+                    <td th:text="${activity.holdTime}"></td>
+                    <td th:text="${activity.location}"></td>
+                    <td th:text="${activity.attendee}"></td>
+                    <td th:text="${activity.fare}"></td>
+                    <td th:text="${activity.host}"></td>
+                    <td th:text="${activity.state}"></td>
+
+                    <td >
+                        <a th:href="@{'/lab-activity/attend?id='+${activity.id}+'&userName='+ ${userName}}">参加</a>
+                        <a th:href="@{'/lab-activity/toUpdate?id='+${activity.id}}">修改</a>
+                        <a th:href="@{'/lab-activity/delete?id='+${activity.id}+ '&labId='+${labId}+'&userName='+ ${userName}}">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

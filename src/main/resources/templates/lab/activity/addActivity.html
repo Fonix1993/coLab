@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.min.css}"/>
+    <style >
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Colab</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}"> 首页 </a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template">
+        <h2>发布新活动</h2>
+        <p th:text="${msg}" style ="color: red;"></p>
+        <div class="col-md-6 col-lg-4 col-md-offset-4 col-lg-offset-4col-xl-offset-4">
+        <form name="form" th:action="@{/lab-activity/create}" action="/lab-activity/create" method="POST"> <!-- 3 -->
+            <div class="form-group">
+                <label for="topic">主题</label>
+                <input type="text" class="form-control" name="topic"  placeholder="主题" />
+            </div>
+            <div class="form-group">
+                <label for="holdTime">举办时间</label>
+                <input type="text" class="form-control" name="holdTime" placeholder="举办时间" />
+            </div>
+            <div class="form-group">
+                <label for="location">地点</label>
+                <input type="text" class="form-control" name="location" placeholder="地点" />
+            </div>
+            <div class="form-group">
+                <label for="fare">费用</label>
+                <input type="text" class="form-control" name="fare" placeholder="费用" />
+            </div>
+            <div class="form-group">
+                <label for="host">举办方</label>
+                <input type="text" class="form-control" name="host" placeholder="举办方" />
+            </div>
+            <div class="form-group">
+                <label for="state">状态</label>
+                <input type="text" class="form-control" name="state" placeholder="状态" />
+            </div>
+            <input type="hidden" name="labId" th:value="${labId}" />
+            <input type="hidden" name="userName" th:value="${userName}" />
+            <input type="submit" id="create" value="创建" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+</body>
+</html>

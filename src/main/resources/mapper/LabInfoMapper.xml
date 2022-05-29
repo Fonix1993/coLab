@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fonix.colab.mapper.LabInfoMapper">
+    <resultMap type="LabInfo" id="labInfoMap">
+        <result property="id" column="id" />
+        <result property="labNum" column="labNum" />
+        <result property="name" column="name" />
+    </resultMap>
+
+    <select id="searchByIdorName" resultMap="labInfoMap" parameterType="String">
+        select id,labNum,name from lab_info li
+        where li.labNum like concat('%',#{value},'%') or li.name like concat('%',#{value},'%')
+    </select>
+
+    <select id="selectByName" resultType="LabInfo" parameterType="String">
+        select * from lab_info li
+        where  li.name = #{labName}
+    </select>
+
+    <insert id="create" parameterType="LabInfo">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO lab_info(
+        id,
+        labNum,
+        name,
+        type,
+        mentor,
+        address,
+        creator
+        )VALUES(
+        #{id},
+        #{labNum},
+        #{name},
+        #{type},
+        #{mentor},
+        #{address},
+        #{creator}
+        )
+    </insert>
+
+
+
+</mapper>

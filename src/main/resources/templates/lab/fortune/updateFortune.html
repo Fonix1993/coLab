@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.min.css}"/>
+    <style >
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Colab</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}"> 首页 </a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template">
+        <h2>修改实验室财产</h2>
+        <p th:text="${msg}" style ="color: red;"></p>
+        <div class="col-md-6 col-lg-4 col-md-offset-4 col-lg-offset-4col-xl-offset-4">
+        <form name="form" th:action="@{/lab-fortune/update}" action="/lab-fortune/update" method="POST"> <!-- 3 -->
+            <div class="form-group">
+                <label for="fortuneName">财产名称</label>
+                <input type="text" class="form-control" name="fortuneName" th:value="${labFortune.fortuneName}"  placeholder="财产名称" />
+            </div>
+            <div class="form-group">
+                <label for="fortuneState">状态</label>
+                <input type="text" class="form-control" name="fortuneState" th:value="${labFortune.fortuneState}"placeholder="状态" />
+            </div>
+            <div class="form-group">
+                <label for="fortuneValue">价值</label>
+                <input type="text" class="form-control" name="fortuneValue" th:value="${labFortune.fortuneValue}" placeholder="价值" />
+            </div>
+            <div class="form-group">
+                <label for="fortuneOwner">购买者</label>
+                <input type="text" class="form-control" name="fortuneOwner" th:value="${labFortune.fortuneOwner}" placeholder="购买者" />
+            </div>
+            <div class="form-group">
+                <label for="purchaseTime">购买时间</label>
+                <input type="text" class="form-control" name="purchase_time" th:value="${labFortune.purchaseTime}" placeholder="购买时间" />
+            </div>
+            <div class="form-group">
+                <label for="disableTime">失效时间</label>
+                <input type="text" class="form-control" name="disable_time" th:value="${labFortune.disableTime}" placeholder="失效时间" />
+            </div>
+            <input type="hidden" name="id" th:value="${labFortune.id}" />
+            <input type="submit" id="update" value="提交" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+</body>
+</html>

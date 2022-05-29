@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fonix.colab.mapper.LabActivityMapper">
+    <resultMap type="LabActivity" id="labActivityMap">
+        <result property="id" column="id" />
+        <result property="labId" column="lab_id" />
+        <result property="topic" column="topic" />
+        <result property="holdTime" column="hold_time"/>
+        <result property="location" column="location"/>
+        <result property="fare" column="fare"/>
+        <result property="attendee" column="attendee"/>
+        <result property="host" column="host"/>
+        <result property="state" column="state"/>
+        <result property="arrangement" column="arrangement"/>
+    </resultMap>
+
+    <select id="selectByLabId" parameterType="int" resultMap="labActivityMap">
+        select * from lab_activity LA where LA.lab_id = #{labId}
+    </select>
+
+    <update id="updateActivityById" parameterType="LabActivity">
+        update  lab_activity LA
+        set lab_id = #{labId}, topic = #{topic}, hold_time = #{holdTime},attendee = #{attendee},
+            location = #{location}, fare = #{fare}, host = #{host}, state = #{state}, arrangement = #{arrangement}
+        where LA.id = #{id}
+    </update>
+
+    <insert id="create" parameterType="LabActivity">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO lab_activity(
+        lab_id,
+        topic,
+        hold_time,
+        location,
+        fare,
+        attendee,
+        host,
+        state,
+        arrangement
+        )VALUES(
+        #{labId},
+        #{topic},
+        #{holdTime},
+        #{location},
+        #{fare},
+        #{attendee},
+        #{host},
+        #{state},
+        #{arrangement}
+        )
+    </insert>
+
+
+</mapper>

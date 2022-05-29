@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fonix.colab.mapper.LabAchievementMapper">
+    <resultMap type="LabAchievement" id="labAchievementMap">
+        <result property="id" column="id" />
+        <result property="labId" column="lab_id" />
+        <result property="time" column="time" />
+        <result property="introduction" column="introduction"/>
+        <result property="achiever" column="achiever"/>
+    </resultMap>
+    <select id="selectByLabId" parameterType="int" resultMap="labAchievementMap">
+        select * from lab_achievement LB where LB.lab_id = #{labId}
+    </select>
+
+    <select id="selectById" parameterType="int" resultType="LabAchievement">
+        select * from lab_achievement LB where LB.id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="int">
+        delete from lab_achievement LB where LB.id = #{id}
+    </delete>
+
+    <update id="updateAchievementById" parameterType="LabAchievement">
+        update lab_achievement LB
+        SET achievement = #{achievement}, introduction = #{introduction}, achiever = #{achiever}
+        where LB.id = #{id}
+    </update>
+
+    <insert id="create" parameterType="LabAchievement">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO lab_achievement(
+            lab_id,
+            achievement,
+            time,
+            introduction,
+            achiever,
+            operator
+        )VALUES(
+            #{labId},
+            #{achievement},
+            #{time},
+            #{introduction},
+            #{achiever},
+            #{operator}
+        )
+    </insert>
+</mapper>

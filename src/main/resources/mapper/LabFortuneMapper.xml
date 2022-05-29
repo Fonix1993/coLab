@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fonix.colab.mapper.LabFortuneMapper">
+
+    <resultMap type="LabFortune" id="labFortuneMap">
+        <result property="labId" column="lab_id" />
+        <result property="fortuneName" column="fortune_name" />
+        <result property="fortuneOwner" column="fortune_owner" />
+        <result property="fortuneState" column="fortune_state"/>
+        <result property="fortuneValue" column="fortune_value"/>
+        <result property="purchaseTime" column="purchase_time"/>
+        <result property="disableTime" column="disable_time"/>
+    </resultMap>
+    <select id="getFortuneByLabId" parameterType="int"  resultMap="labFortuneMap">
+        SELECT *
+        FROM lab_fortune LF
+        WHERE LF.lab_id = #{labId}
+    </select>
+    <select id="getFortuneById" parameterType="int"  resultMap="labFortuneMap">
+        SELECT *
+        FROM lab_fortune LF
+        WHERE LF.id = #{id}
+    </select>
+    <delete id="deleteById" parameterType="LabFortune">
+        delete from lab_fortune where id = #{id}
+    </delete>
+    <update id="updateFortuneById" parameterType="LabFortune" >
+        update lab_fortune
+        set fortune_name = #{fortuneName}, fortune_owner=#{fortuneOwner}, fortune_state =#{fortuneState},
+            fortune_value =#{fortuneValue},purchase_time = #{purchaseTime}, disable_time = #{disableTime}
+        where id = #{id}
+    </update>
+    <insert id="create" parameterType="LabFortune">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO lab_fortune(
+        id,
+        lab_id,
+        fortune_name,
+        fortune_owner,
+        fortune_state,
+        fortune_value,
+        purchase_time,
+        disable_time
+        )VALUES(
+        #{id},
+        #{labId},
+        #{fortuneName},
+        #{fortuneOwner},
+        #{fortuneState},
+        #{fortuneValue},
+        #{purchaseTime},
+        #{disableTime}
+        )
+    </insert>
+</mapper>

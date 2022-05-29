@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../../css/bootstrap.min.css}"/>
+    <style >
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Colab</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}"> 首页 </a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template">
+        <h2>创建新实验室</h2>
+        <p th:text="${msg}" style ="color: red;"></p>
+        <div class="col-md-6 col-lg-4 col-md-offset-4 col-lg-offset-4col-xl-offset-4">
+        <form name="form" th:action="@{/lab-achievement/create}" action="/lab-achievement/create" method="POST"> <!-- 3 -->
+            <div class="form-group">
+                <label for="achievement">成果名称</label>
+                <input type="text" class="form-control" name="achievement"  placeholder="成果名称" />
+            </div>
+            <div class="form-group">
+                <label for="introduction">简介</label>
+                <input type="text" class="form-control" name="introduction" placeholder="简介" />
+            </div>
+            <div class="form-group">
+                <label for="achiever">获得者</label>
+                <input type="text" class="form-control" name="achiever" placeholder="获得者" />
+            </div>
+            <input type="hidden" name="labId" th:value="${labId}" />
+            <input type="submit" id="createAchievement" value="创建" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+</body>
+</html>

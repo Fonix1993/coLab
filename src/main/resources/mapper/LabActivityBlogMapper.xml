@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fonix.colab.mapper.LabActivityBlogMapper">
+
+    <insert id="publishArticle" parameterType="LabActivityBlog">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into lab_activity_blog (activity_id, title, content) values(#{activityId}, #{title}, #{content});
+    </insert>
+
+    <select id="getArticleById" resultType="LabActivityBlog" parameterType="int">
+        select * from lab_activity_blog where id = #{id};
+    </select>
+
+    <select id="getByActivityId" resultType="LabActivityBlog" parameterType="int">
+        select * from lab_activity_blog where activity_id = #{activityId};
+    </select>
+
+    <update id="updateBlogById" parameterType="LabActivityBlog">
+        update  lab_activity_blog LAB
+        set title = #{title}, content = #{content}
+        where id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <title>注册页面</title>
+    <link rel="stylesheet" th:href="@{../css/bootstrap.min.css}"/>
+    <style >
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Colab</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{'/?userName'+${userName}}"> 首页 </a></li>
+                <li>
+                    <a th:if="${userName} == null" th:href="@{/toLogin}"> 登录 </a>
+                    <a th:if="${userName} != null" th:href="@{'/user-center/toUserCenter?userName='+ ${userName}}">个人中心</a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template">
+        <h2>欢迎来到用户中心</h2>
+    </div>
+</div>
+
+</body>
+</html>
